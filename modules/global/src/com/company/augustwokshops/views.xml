@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.augustwokshops.entity.Operation"
+          extends="_local"
+          name="operation-edit">
+        <property name="model"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.Model"
+          extends="_local"
+          name="model-edit">
+        <property name="operations"
+                  view="operation-edit"/>
+        <property name="workShop"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.LaborIntensity"
+          extends="_local"
+          name="laborIntensity-edit">
+        <property name="employee"
+                  view="_local"/>
+        <property name="operation"
+                  view="operation-edit"/>
+        <property name="model"
+                  view="_minimal">
+            <property name="operations"
+                      view="operation-edit"/>
+        </property>
+        <property name="workshop"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.Employee"
+          extends="_local"
+          name="employee-browser">
+        <property name="workShop"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.Employee"
+          extends="_local"
+          name="employee-edit">
+        <property name="workShop"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.LaborIntensity"
+          extends="_local"
+          name="laborIntensity-browser">
+        <property name="employee"
+                  view="_local"/>
+        <property name="model"
+                  view="_local"/>
+        <property name="operation"
+                  view="_local"/>
+        <property name="workshop"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.Model"
+          extends="_local"
+          name="model-browser">
+        <property name="operations"
+                  view="_minimal"/>
+        <property name="workShop"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.Operation"
+          extends="_local"
+          name="operation-browser">
+        <property name="model"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.WorkShop"
+          extends="_local"
+          name="workShop-browser"/>
+    <view class="com.company.augustwokshops.entity.WorkShop"
+          extends="_local"
+          name="workShop-edit">
+        <property name="emploees"
+                  view="employee-browser"/>
+        <property name="models"
+                  view="model-browser"/>
+    </view>
+</views>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.augustwokshops.web.laborintensity.LaborIntensityEdit"
+        datasource="laborIntensityDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.augustwokshops.web.laborintensity">
+    <dsContext>
+        <datasource id="laborIntensityDs"
+                    class="com.company.augustwokshops.entity.LaborIntensity"
+                    view="laborIntensity-edit"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="laborIntensityDs">
+            <column width="250px">
+                <field property="date"/>
+                <field property="employee"/>
+                <field property="model"/>
+                <field property="operation"/>
+                <field property="operation.operationTimeSec"/>
+                <field property="operation.partyTimeMin"/>
+                <field property="partyCount"/>
+                <field property="totalMin"/>
+                <field property="elaboration"/>
+                <field property="workshop"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

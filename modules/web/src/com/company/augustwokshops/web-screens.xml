@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <screen id="augustwokshops$Employee.browse"
+            template="com/company/augustwokshops/web/employee/employee-browse.xml"/>
+    <screen id="augustwokshops$Employee.edit"
+            template="com/company/augustwokshops/web/employee/employee-edit.xml"/>
+    <screen id="augustwokshops$Model.browse"
+            template="com/company/augustwokshops/web/model/model-browse.xml"/>
+    <screen id="augustwokshops$Model.edit"
+            template="com/company/augustwokshops/web/model/model-edit.xml"/>
+    <screen id="augustwokshops$Operation.browse"
+            template="com/company/augustwokshops/web/operation/operation-browse.xml"/>
+    <screen id="augustwokshops$Operation.edit"
+            template="com/company/augustwokshops/web/operation/operation-edit.xml"/>
+    <screen id="augustwokshops$WorkShop.browse"
+            template="com/company/augustwokshops/web/workshop/work-shop-browse.xml"/>
+    <screen id="augustwokshops$WorkShop.edit"
+            template="com/company/augustwokshops/web/workshop/work-shop-edit.xml"/>
+    <screen id="augustwokshops$LaborIntensity.browse"
+            template="com/company/augustwokshops/web/laborintensity/labor-intensity-browse.xml"/>
+    <screen id="augustwokshops$LaborIntensity.edit"
+            template="com/company/augustwokshops/web/laborintensity/labor-intensity-edit.xml"/>
+</screen-config>

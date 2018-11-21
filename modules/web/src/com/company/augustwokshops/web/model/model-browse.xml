@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.augustwokshops.web.model.ModelBrowse"
+        focusComponent="modelsTable"
+        lookupComponent="modelsTable"
+        messagesPack="com.company.augustwokshops.web.model">
+    <dsContext>
+        <groupDatasource id="modelsDs"
+                         class="com.company.augustwokshops.entity.Model"
+                         view="model-browser">
+            <query>
+                <![CDATA[select e from augustwokshops$Model e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="modelsTable"
+            spacing="true">
+        <groupTable id="modelsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rows datasource="modelsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="modelsTable.create"/>
+                <button id="editBtn"
+                        action="modelsTable.edit"/>
+                <button id="removeBtn"
+                        action="modelsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

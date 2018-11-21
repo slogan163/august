@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.augustwokshops.web.laborintensity.LaborIntensityBrowse"
+        focusComponent="laborIntensitiesTable"
+        lookupComponent="laborIntensitiesTable"
+        messagesPack="com.company.augustwokshops.web.laborintensity">
+    <dsContext>
+        <groupDatasource id="laborIntensitiesDs"
+                         class="com.company.augustwokshops.entity.LaborIntensity"/>
+        <collectionDatasource id="workShopsDs"
+                              class="com.company.augustwokshops.entity.WorkShop">
+            <query>
+                <![CDATA[select e from augustwokshops$WorkShop e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="laborIntensitiesTable"
+            spacing="true">
+        <hbox spacing="true">
+            <label align="MIDDLE_CENTER"
+                   value="msg://workshop"/>
+            <lookupField id="workshopLookup"
+                         align="MIDDLE_CENTER"
+                         optionsDatasource="workShopsDs"/>
+            <label align="MIDDLE_CENTER"
+                   value="msg://month"/>
+            <datePicker id="monthPicker"
+                        resolution="MONTH"/>
+            <label align="MIDDLE_CENTER"
+                   value="msg://groupBY"/>
+            <lookupField id="groupByLookup"
+                         align="MIDDLE_CENTER"
+                         nullOptionVisible="false"
+                         optionsEnum="com.company.augustwokshops.web.laborintensity.GroupBy"/>
+        </hbox>
+        <groupTable id="laborIntensitiesTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <group>
+                    <column id="date"/>
+                    <column id="employee"/>
+                </group>
+                <column id="model"/>
+                <column id="operation"/>
+                <column id="operation.operationTimeSec"/>
+                <column id="operation.partyTimeMin"/>
+                <column id="partyCount"/>
+                <column id="elaboration"/>
+            </columns>
+            <rows datasource="laborIntensitiesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="laborIntensitiesTable.create"/>
+                <button id="editBtn"
+                        action="laborIntensitiesTable.edit"/>
+                <button id="removeBtn"
+                        action="laborIntensitiesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

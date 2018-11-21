@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.augustwokshops.web.model.ModelEdit"
+        datasource="modelDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.augustwokshops.web.model">
+    <dsContext>
+        <datasource id="modelDs"
+                    class="com.company.augustwokshops.entity.Model"
+                    view="model-edit">
+            <collectionDatasource id="operationDs"
+                                  property="operations"/>
+            <datasource id="workShopDs"
+                        property="workShop"/>
+        </datasource>
+        <collectionDatasource id="workShopsDs"
+                              class="com.company.augustwokshops.entity.WorkShop">
+            <query>
+                <![CDATA[select e from augustwokshops$WorkShop e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="modelDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="workShop">
+                    <lookupField datasource="modelDs"
+                                 optionsDatasource="workShopsDs"
+                                 property="workShop"/>
+                </field>
+            </column>
+        </fieldGroup>
+        <groupBox caption="msg://menu-config.augustwokshops$Operation.browse">
+            <table id="operationTable"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="number"/>
+                    <column id="description"/>
+                    <column id="executor"/>
+                    <column id="facilitiesAndPlaceOfPerfomance"/>
+                    <column id="operationTimeSec"/>
+                    <column id="partyTimeMin"/>
+                </columns>
+                <rows datasource="operationDs"/>
+                <buttonsPanel>
+                    <button id="createBtn"
+                            action="operationTable.create"/>
+                    <button id="updateBtn"
+                            action="operationTable.edit"/>
+                    <button id="removeBtn"
+                            action="operationTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

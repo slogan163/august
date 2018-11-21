@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.augustwokshops.web.workshop.WorkShopEdit"
+        datasource="workShopDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.augustwokshops.web.workshop">
+    <dsContext>
+        <datasource id="workShopDs"
+                    class="com.company.augustwokshops.entity.WorkShop"
+                    view="workShop-edit">
+            <collectionDatasource id="employeesDs"
+                                  property="emploees"/>
+            <collectionDatasource id="modelsDs"
+                                  property="models"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="workShopDs">
+            <column width="250px">
+                <field property="number"/>
+            </column>
+        </fieldGroup>
+        <groupBox caption="msg://menu-config.augustwokshops$Model.browse">
+            <table id="modelsTable"
+                   width="100%">
+                <actions>
+                    <action id="add"/>
+                    <action id="exclude"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                </columns>
+                <rows datasource="modelsDs"/>
+                <rowsCount/>
+                <buttonsPanel id="modelsButtonsPanel"
+                              alwaysVisible="true">
+                    <button id="addBtn"
+                            action="modelsTable.add"/>
+                    <button id="excludeBtn"
+                            action="modelsTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox caption="msg://menu-config.augustwokshops$Employee.browse">
+            <table id="employeesTable"
+                   width="100%">
+                <actions>
+                    <action id="add"/>
+                    <action id="exclude"/>
+                </actions>
+                <columns>
+                    <column id="firstName"/>
+                    <column id="lastName"/>
+                </columns>
+                <rows datasource="employeesDs"/>
+                <rowsCount/>
+                <buttonsPanel id="employeesButtonsPanel"
+                              alwaysVisible="true">
+                    <button id="addEmpBtn"
+                            action="employeesTable.add"/>
+                    <button id="excludeEmpBtn"
+                            action="employeesTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

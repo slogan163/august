@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.augustwokshops.web.operation.OperationEdit"
+        datasource="operationDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.augustwokshops.web.operation">
+    <dsContext>
+        <datasource id="operationDs"
+                    class="com.company.augustwokshops.entity.Operation"
+                    view="operation-edit"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="operationDs">
+            <column width="250px">
+                <field property="model"/>
+                <field property="number"/>
+                <field property="description"
+                       rows="5"/>
+                <field property="executor"/>
+                <field property="facilitiesAndPlaceOfPerfomance"/>
+                <field property="operationTimeSec"/>
+                <field property="partyTimeMin"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

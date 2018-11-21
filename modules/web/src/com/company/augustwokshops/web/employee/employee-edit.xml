@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.augustwokshops.web.employee.EmployeeEdit"
+        datasource="employeeDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.augustwokshops.web.employee">
+    <dsContext>
+        <datasource id="employeeDs"
+                    class="com.company.augustwokshops.entity.Employee"
+                    view="employee-edit">
+            <datasource id="workshopDs"
+                        property="workShop"/>
+        </datasource>
+        <collectionDatasource id="workShopsDs"
+                              class="com.company.augustwokshops.entity.WorkShop"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from augustwokshops$WorkShop e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="employeeDs">
+            <column width="250px">
+                <field property="firstName"/>
+                <field property="lastName"/>
+                <field property="workShop">
+                    <lookupField datasource="employeeDs"
+                                 optionsDatasource="workShopsDs"
+                                 property="workShop"/>
+                </field>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>
