@@ -31,13 +31,16 @@ public class Operation extends StandardEntity {
     @Column(name = "FACILITIES_AND_PLACE_OF_PERFOMANCE")
     protected String facilitiesAndPlaceOfPerfomance;
 
-    @Column(name = "OPERATION_TIME_MIN")
-    protected Integer operationTimeSec;
+    @NotNull
+    @Column(name = "OPERATION_TIME_MIN", nullable = false)
+    protected Integer operationTimeSec = 0;
 
-    @Column(name = "PARTY_TIME")
-    protected Integer partyTimeMin;
+    @NotNull
+    @Column(name = "PARTY_TIME", nullable = false)
+    protected Integer partyTimeMin = 0;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MODEL_ID")
     protected Model model;
 

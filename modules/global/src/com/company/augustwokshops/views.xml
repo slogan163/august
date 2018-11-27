@@ -21,13 +21,6 @@
                   view="_local"/>
         <property name="operation"
                   view="operation-edit"/>
-        <property name="model"
-                  view="_minimal">
-            <property name="operations"
-                      view="operation-edit"/>
-        </property>
-        <property name="workshop"
-                  view="_minimal"/>
     </view>
     <view class="com.company.augustwokshops.entity.Employee"
           extends="_local"
@@ -46,11 +39,17 @@
           name="laborIntensity-browser">
         <property name="employee"
                   view="_local"/>
-        <property name="model"
-                  view="_local"/>
         <property name="operation"
-                  view="_local"/>
-        <property name="workshop"
+                  view="_local">
+            <property name="model"
+                      view="_minimal">
+                <property name="workShop"
+                          view="_minimal"/>
+            </property>
+        </property>
+        <property name="workShop"
+                  view="_minimal"/>
+        <property name="model"
                   view="_minimal"/>
     </view>
     <view class="com.company.augustwokshops.entity.Model"
@@ -77,5 +76,16 @@
                   view="employee-browser"/>
         <property name="models"
                   view="model-browser"/>
+    </view>
+    <view class="com.company.augustwokshops.entity.WorkShop"
+          extends="_local"
+          name="laborIntensity-workshops">
+        <property name="emploees"
+                  view="_minimal"/>
+        <property name="models"
+                  view="_minimal">
+            <property name="operations"
+                      view="_local"/>
+        </property>
     </view>
 </views>

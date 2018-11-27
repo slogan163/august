@@ -7,7 +7,8 @@
         messagesPack="com.company.augustwokshops.web.laborintensity">
     <dsContext>
         <groupDatasource id="laborIntensitiesDs"
-                         class="com.company.augustwokshops.entity.LaborIntensity"/>
+                         class="com.company.augustwokshops.entity.LaborIntensity"
+                         datasourceClass="com.company.augustwokshops.web.laborintensity.LaborIntensitiesDs"/>
         <collectionDatasource id="workShopsDs"
                               class="com.company.augustwokshops.entity.WorkShop">
             <query>
@@ -24,30 +25,28 @@
                    value="msg://workshop"/>
             <lookupField id="workshopLookup"
                          align="MIDDLE_CENTER"
+                         nullName="msg://all"
                          optionsDatasource="workShopsDs"/>
             <label align="MIDDLE_CENTER"
                    value="msg://month"/>
             <datePicker id="monthPicker"
                         resolution="MONTH"/>
-            <label align="MIDDLE_CENTER"
-                   value="msg://groupBY"/>
-            <lookupField id="groupByLookup"
-                         align="MIDDLE_CENTER"
-                         nullOptionVisible="false"
-                         optionsEnum="com.company.augustwokshops.web.laborintensity.GroupBy"/>
         </hbox>
         <groupTable id="laborIntensitiesTable"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
+                <action id="create"
+                        openType="DIALOG"/>
+                <action id="edit"
+                        openType="DIALOG"/>
                 <action id="remove"/>
             </actions>
             <columns>
                 <group>
                     <column id="date"/>
-                    <column id="employee"/>
                 </group>
+                <column id="workShop"/>
+                <column id="employee"/>
                 <column id="model"/>
                 <column id="operation"/>
                 <column id="operation.operationTimeSec"/>

@@ -6,13 +6,13 @@
         lookupComponent="operationsTable"
         messagesPack="com.company.augustwokshops.web.operation">
     <dsContext>
-        <groupDatasource id="operationsDs"
-                         class="com.company.augustwokshops.entity.Operation"
-                         view="operation-browser">
+        <collectionDatasource id="operationsDs"
+                              class="com.company.augustwokshops.entity.Operation"
+                              view="operation-browser">
             <query>
                 <![CDATA[select e from augustwokshops$Operation e]]>
             </query>
-        </groupDatasource>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -21,8 +21,10 @@
         <groupTable id="operationsTable"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
+                <action id="create"
+                        openType="DIALOG"/>
+                <action id="edit"
+                        openType="DIALOG"/>
                 <action id="remove"/>
             </actions>
             <columns>

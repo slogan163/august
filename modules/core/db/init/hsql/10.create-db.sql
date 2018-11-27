@@ -30,9 +30,9 @@ create table AUGUSTWOKSHOPS_OPERATION (
     DESCRIPTION longvarchar,
     EXECUTOR varchar(255),
     FACILITIES_AND_PLACE_OF_PERFOMANCE varchar(255),
-    OPERATION_TIME_MIN integer,
-    PARTY_TIME integer,
-    MODEL_ID varchar(36),
+    OPERATION_TIME_MIN integer not null,
+    PARTY_TIME integer not null,
+    MODEL_ID varchar(36) not null,
     --
     primary key (ID)
 )^
@@ -48,7 +48,7 @@ create table AUGUSTWOKSHOPS_EMPLOYEE (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    FIRST_NAME varchar(255),
+    FIRST_NAME varchar(255) not null,
     LAST_NAME varchar(255) not null,
     WORK_SHOP_ID varchar(36),
     --
@@ -84,11 +84,9 @@ create table AUGUSTWOKSHOPS_LABOR_INTENSITY (
     DELETED_BY varchar(50),
     --
     DATE_ date not null,
-    WORKSHOP_ID varchar(36),
-    EMPLOYEE_ID varchar(36),
-    MODEL_ID varchar(36),
-    OPERATION_ID varchar(36),
-    PARTY_COUNT integer,
+    EMPLOYEE_ID varchar(36) not null,
+    OPERATION_ID varchar(36) not null,
+    PARTY_COUNT integer not null,
     ELABORATION varchar(255),
     --
     primary key (ID)

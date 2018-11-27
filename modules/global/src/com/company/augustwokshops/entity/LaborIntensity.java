@@ -1,5 +1,6 @@
 package com.company.augustwokshops.entity;
 
+import javax.annotation.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -13,6 +14,8 @@ import javax.persistence.TemporalType;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.global.PersistenceHelper;
+
 import javax.validation.constraints.NotNull;
 
 @NamePattern("%s|employee")
@@ -26,55 +29,54 @@ public class LaborIntensity extends StandardEntity {
     @Column(name = "DATE_", nullable = false)
     protected Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "WORKSHOP_ID")
-    protected WorkShop workshop;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "EMPLOYEE_ID")
     protected Employee employee;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MODEL_ID")
-    protected Model model;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "OPERATION_ID")
     protected Operation operation;
 
-    @Column(name = "PARTY_COUNT")
-    protected Integer partyCount;
+    @NotNull
+    @Column(name = "PARTY_COUNT", nullable = false)
+    protected Integer partyCount = 0;
 
     @Column(name = "ELABORATION")
     protected String elaboration;
 
-    public void setWorkshop(WorkShop workshop) {
-        this.workshop = workshop;
-    }
-
-    public WorkShop getWorkshop() {
-        return workshop;
-    }
-
-
     @MetaProperty(related = "operation")
     public Double getTotalMin() {
-        if (operation == null) {
+        if (!PersistenceHelper.isLoaded(this, "operation") || operation == null) {
             return 0d;
         }
 
-        return new Double((double) (operation.operationTimeSec / 60 * partyCount + operation.partyTimeMin));
+        return (double) (operation.operationTimeSec / 60 * partyCount + operation.partyTimeMin);
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    @Nullable
+    @MetaProperty(mandatory = true, related = "operation")
+    public WorkShop getWorkShop() {
+        Model model = getModel();
+
+        if (model == null || !PersistenceHelper.isLoaded(model, "workShop")) {
+            return null;
+        }
+
+        return model.getWorkShop();
     }
 
+    @Nullable
+    @MetaProperty(mandatory = true, related = "operation")
     public Model getModel() {
-        return model;
-    }
+        if (!PersistenceHelper.isLoaded(this, "operation") || operation == null ||
+                !PersistenceHelper.isLoaded(operation, "model")) {
+            return null;
+        }
 
+        return operation.getModel();
+    }
 
     public void setElaboration(String elaboration) {
         this.elaboration = elaboration;
@@ -84,7 +86,6 @@ public class LaborIntensity extends StandardEntity {
         return elaboration;
     }
 
-
     public void setPartyCount(Integer partyCount) {
         this.partyCount = partyCount;
     }
@@ -93,7 +94,6 @@ public class LaborIntensity extends StandardEntity {
         return partyCount;
     }
 
-
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
@@ -101,7 +101,6 @@ public class LaborIntensity extends StandardEntity {
     public Operation getOperation() {
         return operation;
     }
-
 
     public void setDate(Date date) {
         this.date = date;
@@ -118,6 +117,5 @@ public class LaborIntensity extends StandardEntity {
     public Employee getEmployee() {
         return employee;
     }
-
 
 }

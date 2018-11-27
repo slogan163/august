@@ -17,7 +17,8 @@
         <fieldGroup id="fieldGroup"
                     datasource="operationDs">
             <column width="250px">
-                <field property="model"/>
+                <field property="model"
+                       editable="false"/>
                 <field property="number"/>
                 <field property="description"
                        rows="5"/>

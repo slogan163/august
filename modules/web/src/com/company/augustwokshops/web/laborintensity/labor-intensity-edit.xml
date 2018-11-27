@@ -4,11 +4,32 @@
         class="com.company.augustwokshops.web.laborintensity.LaborIntensityEdit"
         datasource="laborIntensityDs"
         focusComponent="fieldGroup"
+        
         messagesPack="com.company.augustwokshops.web.laborintensity">
     <dsContext>
         <datasource id="laborIntensityDs"
                     class="com.company.augustwokshops.entity.LaborIntensity"
-                    view="laborIntensity-edit"/>
+                    view="laborIntensity-edit">
+            <datasource id="employeeDs"
+                        property="employee"/>
+            <datasource id="operationDs"
+                        property="operation"/>
+        </datasource>
+        <collectionDatasource id="workShopsDs"
+                              allowCommit="false"
+                              class="com.company.augustwokshops.entity.WorkShop"
+                              view="laborIntensity-workshops">
+            <query>
+                <![CDATA[select e from augustwokshops$WorkShop e]]>
+            </query>
+            <collectionDatasource id="emploeesDs"
+                                  property="emploees"/>
+            <collectionDatasource id="modelsDs"
+                                  property="models">
+                <collectionDatasource id="operationsDs"
+                                      property="operations"/>
+            </collectionDatasource>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -18,15 +39,37 @@
                     datasource="laborIntensityDs">
             <column width="250px">
                 <field property="date"/>
-                <field property="employee"/>
-                <field property="model"/>
-                <field property="operation"/>
-                <field property="operation.operationTimeSec"/>
-                <field property="operation.partyTimeMin"/>
+                <field id="workShop"
+                       required="true">
+                    <lookupField id="workShopLookup"
+                                 optionsDatasource="workShopsDs"/>
+                </field>
+                <field id="employee"
+                       required="true">
+                    <lookupField id="employeeLookup"
+                                 datasource="laborIntensityDs"
+                                 property="employee"
+                                 optionsDatasource="emploeesDs"/>
+                </field>
+                <field id="model"
+                       required="true">
+                    <lookupField id="modelLookup"
+                                 optionsDatasource="modelsDs"/>
+                </field>
+                <field id="operation"
+                       required="true">
+                    <lookupField id="operationLookup"
+                                 datasource="laborIntensityDs"
+                                 property="operation"
+                                 optionsDatasource="operationsDs"/>
+                </field>
+                <field datasource="operationDs"
+                       property="operationTimeSec"/>
+                <field datasource="operationDs"
+                       property="partyTimeMin"/>
                 <field property="partyCount"/>
                 <field property="totalMin"/>
                 <field property="elaboration"/>
-                <field property="workshop"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"
