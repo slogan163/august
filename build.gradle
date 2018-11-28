@@ -11,13 +11,6 @@ buildscript {
                 password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
             }
         }
-        maven {
-            url 'https://repo.cuba-platform.com/content/groups/premium'
-            credentials {
-                username(rootProject.hasProperty('premiumRepoUser') ? rootProject['premiumRepoUser'] : System.getenv('CUBA_PREMIUM_USER'))
-                password(rootProject.hasProperty('premiumRepoPass') ? rootProject['premiumRepoPass'] : System.getenv('CUBA_PREMIUM_PASSWORD'))
-            }
-        }
         
     }
     dependencies {
@@ -50,11 +43,10 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
-    appComponent("com.haulmont.reports:reports-global:$cubaVersion")
 
 }
 
-def hsql = 'org.hsqldb:hsqldb:2.2.9'
+def postgres = 'org.postgresql:postgresql:9.4.1212'
 
 configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
@@ -96,8 +88,8 @@ configure(coreModule) {
     dependencies {
         compile(globalModule)
         provided(servletApi)
-        jdbc(hsql)
-        testRuntime(hsql)
+        jdbc(postgres)
+        testRuntime(postgres)
 
     }
 
@@ -118,19 +110,19 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'hsql'
+        dbms = 'postgres'
         host = 'localhost'
         dbName = 'augustwokshops'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbUser = 'cuba'
+        dbPassword = 'cuba'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
-        dbms = 'hsql'
+        dbms = 'postgres'
         host = 'localhost'
         dbName = 'augustwokshops'
-        dbUser = 'sa'
-        dbPassword = ''
+        dbUser = 'cuba'
+        dbPassword = 'cuba'
     }
 }
     

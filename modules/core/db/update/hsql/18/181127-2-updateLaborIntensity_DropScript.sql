@@ -1,2 +1,0 @@
-alter table AUGUSTWOKSHOPS_LABOR_INTENSITY drop column WORKSHOP_ID__U04169 cascade ;
-alter table AUGUSTWOKSHOPS_LABOR_INTENSITY drop column MODEL_ID__U18077 cascade ;

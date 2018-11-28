@@ -1,5 +1,5 @@
 create table AUGUSTWOKSHOPS_LABOR_INTENSITY (
-    ID varchar(36) not null,
+    ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -8,11 +8,10 @@ create table AUGUSTWOKSHOPS_LABOR_INTENSITY (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    DATE_ date,
-    EMPLOYEE_ID varchar(36),
-    MODEL_ID varchar(36),
-    OPERATION_ID varchar(36),
-    PARTY_COUNT integer,
+    DATE_ date not null,
+    EMPLOYEE_ID uuid not null,
+    OPERATION_ID uuid not null,
+    PARTY_COUNT integer not null,
     ELABORATION varchar(255),
     --
     primary key (ID)

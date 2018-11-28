@@ -18,53 +18,75 @@
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="laborIntensitiesTable"
+    <layout width="100%"
+            height="100%"
             spacing="true">
-        <hbox spacing="true">
-            <label align="MIDDLE_CENTER"
-                   value="msg://workshop"/>
-            <lookupField id="workshopLookup"
-                         align="MIDDLE_CENTER"
-                         nullName="msg://all"
-                         optionsDatasource="workShopsDs"/>
-            <label align="MIDDLE_CENTER"
-                   value="msg://month"/>
-            <datePicker id="monthPicker"
-                        resolution="MONTH"/>
-        </hbox>
-        <groupTable id="laborIntensitiesTable"
-                    width="100%">
-            <actions>
-                <action id="create"
-                        openType="DIALOG"/>
-                <action id="edit"
-                        openType="DIALOG"/>
-                <action id="remove"/>
-            </actions>
-            <columns>
-                <group>
-                    <column id="date"/>
-                </group>
-                <column id="workShop"/>
-                <column id="employee"/>
-                <column id="model"/>
-                <column id="operation"/>
-                <column id="operation.operationTimeSec"/>
-                <column id="operation.partyTimeMin"/>
-                <column id="partyCount"/>
-                <column id="elaboration"/>
-            </columns>
-            <rows datasource="laborIntensitiesDs"/>
-            <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="createBtn"
-                        action="laborIntensitiesTable.create"/>
-                <button id="editBtn"
-                        action="laborIntensitiesTable.edit"/>
-                <button id="removeBtn"
-                        action="laborIntensitiesTable.remove"/>
-            </buttonsPanel>
-        </groupTable>
+        <tabSheet width="100%"
+                  height="100%">
+            <tab id="commonTab"
+                 caption="msg://common">
+                <vbox id="laborIntensitiesBox"
+                      width="100%"
+                      height="100%"
+                      expand="laborIntensitiesTable"
+                      spacing="true"
+                      margin="true,false,false,false">
+                    <hbox spacing="true">
+                        <label align="MIDDLE_CENTER"
+                               value="msg://workshop"/>
+                        <lookupField id="workshopLookup"
+                                     align="MIDDLE_CENTER"
+                                     nullName="msg://all"
+                                     optionsDatasource="workShopsDs"/>
+                        <label align="MIDDLE_CENTER"
+                               value="msg://month"/>
+                        <datePicker id="monthPicker"
+                                    resolution="MONTH"/>
+                    </hbox>
+                    <groupTable id="laborIntensitiesTable"
+                                width="100%">
+                        <actions>
+                            <action id="create"
+                                    openType="DIALOG"/>
+                            <action id="edit"
+                                    openType="DIALOG"/>
+                            <action id="remove"/>
+                        </actions>
+                        <columns>
+                            <group>
+                                <column id="date"/>
+                            </group>
+                            <column id="workShop"/>
+                            <column id="employee"/>
+                            <column id="model"/>
+                            <column id="operation"/>
+                            <column id="operation.operationTimeSec"/>
+                            <column id="operation.partyTimeMin"/>
+                            <column id="partyCount"/>
+                            <column id="elaboration"/>
+                        </columns>
+                        <rows datasource="laborIntensitiesDs"/>
+                        <rowsCount/>
+                        <buttonsPanel id="buttonsPanel"
+                                      alwaysVisible="true">
+                            <button id="createBtn"
+                                    action="laborIntensitiesTable.create"/>
+                            <button id="editBtn"
+                                    action="laborIntensitiesTable.edit"/>
+                            <button id="removeBtn"
+                                    action="laborIntensitiesTable.remove"/>
+                        </buttonsPanel>
+                    </groupTable>
+                </vbox>
+            </tab>
+            <tab id="timesheetTab"
+                 caption="msg://timesheet">
+                <vbox id="timesheetTabBox"
+                      width="100%"
+                      height="100%"
+                      spacing="true"
+                      margin="true,false,false,false"/>
+            </tab>
+        </tabSheet>
     </layout>
 </window>
