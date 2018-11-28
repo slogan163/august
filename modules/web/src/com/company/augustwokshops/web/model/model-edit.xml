@@ -21,9 +21,11 @@
             </query>
         </collectionDatasource>
     </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="windowActions"
+    <dialogMode closeOnClickOutside="true"
+                resizable="true"
+                height="600"
+                width="1000"/>
+    <layout expand="groupBox"
             spacing="true">
         <fieldGroup id="fieldGroup"
                     datasource="modelDs">
@@ -36,8 +38,11 @@
                 </field>
             </column>
         </fieldGroup>
-        <groupBox caption="msg://menu-config.augustwokshops$Operation.browse">
+        <groupBox id="groupBox"
+                  caption="msg://menu-config.augustwokshops$Operation.browse"
+                  width="100%">
             <table id="operationTable"
+                   height="100%"
                    width="100%">
                 <actions>
                     <action id="create"/>

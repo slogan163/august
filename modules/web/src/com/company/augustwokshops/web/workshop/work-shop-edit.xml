@@ -15,59 +15,80 @@
                                   property="models"/>
         </datasource>
     </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
+    <dialogMode closeOnClickOutside="true"
+                resizable="true"
+                height="800"
+                width="1000"/>
+    <layout spacing="true"
+            expand="split">
         <fieldGroup id="fieldGroup"
                     datasource="workShopDs">
             <column width="250px">
                 <field property="number"/>
             </column>
         </fieldGroup>
-        <groupBox caption="msg://menu-config.augustwokshops$Model.browse">
-            <table id="modelsTable"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="exclude"/>
-                </actions>
-                <columns>
-                    <column id="name"/>
-                </columns>
-                <rows datasource="modelsDs"/>
-                <rowsCount/>
-                <buttonsPanel id="modelsButtonsPanel"
-                              alwaysVisible="true">
-                    <button id="addBtn"
-                            action="modelsTable.add"/>
-                    <button id="excludeBtn"
-                            action="modelsTable.exclude"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
-        <groupBox caption="msg://menu-config.augustwokshops$Employee.browse">
-            <table id="employeesTable"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="exclude"/>
-                </actions>
-                <columns>
-                    <column id="firstName"/>
-                    <column id="lastName"/>
-                </columns>
-                <rows datasource="employeesDs"/>
-                <rowsCount/>
-                <buttonsPanel id="employeesButtonsPanel"
-                              alwaysVisible="true">
-                    <button id="addEmpBtn"
-                            action="employeesTable.add"/>
-                    <button id="excludeEmpBtn"
-                            action="employeesTable.exclude"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+        <split id="split"
+               width="100%">
+            <vbox margin="false,false,true,false"
+                  width="100%"
+                  height="100%">
+                <groupBox id="groupBoxModel"
+                          width="100%"
+                          height="100%"
+                          caption="msg://menu-config.augustwokshops$Model.browse">
+                    <table id="modelsTable"
+                           height="100%"
+                           width="100%">
+                        <actions>
+                            <action id="add"/>
+                            <action id="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <rows datasource="modelsDs"/>
+                        <rowsCount/>
+                        <buttonsPanel id="modelsButtonsPanel"
+                                      alwaysVisible="true">
+                            <button id="addBtn"
+                                    action="modelsTable.add"/>
+                            <button id="excludeBtn"
+                                    action="modelsTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </vbox>
+            <vbox margin="true,false,false,false"
+                  width="100%"
+                  height="100%">
+                <groupBox id="groupBoxEmployee"
+                          width="100%"
+                          height="100%"
+                          caption="msg://menu-config.augustwokshops$Employee.browse">
+                    <table id="employeesTable"
+                           height="100%"
+                           width="100%">
+                        <actions>
+                            <action id="add"/>
+                            <action id="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="firstName"/>
+                            <column id="lastName"/>
+                        </columns>
+                        <rows datasource="employeesDs"/>
+                        <rowsCount/>
+                        <buttonsPanel id="employeesButtonsPanel"
+                                      alwaysVisible="true">
+                            <button id="addEmpBtn"
+                                    action="employeesTable.add"/>
+                            <button id="excludeEmpBtn"
+                                    action="employeesTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </vbox>
+        </split>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

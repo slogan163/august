@@ -10,8 +10,9 @@
                     class="com.company.augustwokshops.entity.Operation"
                     view="operation-edit"/>
     </dsContext>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode closeOnClickOutside="true"
+                height="auto"
+                width="auto"/>
     <layout expand="windowActions"
             spacing="true">
         <fieldGroup id="fieldGroup"

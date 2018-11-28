@@ -51,6 +51,7 @@
                             <action id="edit"
                                     openType="DIALOG"/>
                             <action id="remove"/>
+                            <action id="excel"/>
                         </actions>
                         <columns>
                             <group>
@@ -75,6 +76,8 @@
                                     action="laborIntensitiesTable.edit"/>
                             <button id="removeBtn"
                                     action="laborIntensitiesTable.remove"/>
+                            <button id="excelBtn"
+                                    action="laborIntensitiesTable.excel"/>
                         </buttonsPanel>
                     </groupTable>
                 </vbox>
