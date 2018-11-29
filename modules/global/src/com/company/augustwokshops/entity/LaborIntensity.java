@@ -52,7 +52,8 @@ public class LaborIntensity extends StandardEntity {
             return 0d;
         }
 
-        return (double) (operation.operationTimeSec / 60 * partyCount + operation.partyTimeMin);
+        double partyAllTimeMin = (double) operation.operationTimeSec * partyCount / 60;
+        return partyAllTimeMin == 0d ? 0d : partyAllTimeMin + operation.partyTimeMin;
     }
 
     @Nullable

@@ -4,7 +4,6 @@
         class="com.company.augustwokshops.web.laborintensity.LaborIntensityEdit"
         datasource="laborIntensityDs"
         focusComponent="fieldGroup"
-        
         messagesPack="com.company.augustwokshops.web.laborintensity">
     <dsContext>
         <datasource id="laborIntensityDs"
@@ -64,15 +63,38 @@
                                  property="operation"
                                  optionsDatasource="operationsDs"/>
                 </field>
-                <field datasource="operationDs"
-                       property="operationTimeSec"/>
-                <field datasource="operationDs"
-                       property="partyTimeMin"/>
-                <field property="partyCount"/>
-                <field property="totalMin"/>
+                <field id="operation.operationTimeSec">
+                    <textField id="operationTimeSecField"
+                               datasource="operationDs"
+                               editable="false"
+                               property="operationTimeSec"
+                               datatype="int"/>
+                </field>
+                <field id="operation.partyTimeMin">
+                    <textField id="partyTimeMinField"
+                               datasource="operationDs"
+                               editable="false"
+                               property="partyTimeMin"
+                               datatype="int"/>
+                </field>
+                <field id="partyCount">
+                    <textField id="partyCountField"
+                               datasource="laborIntensityDs"
+                               property="partyCount"
+                               datatype="int"/>
+                </field>
                 <field property="elaboration"/>
             </column>
         </fieldGroup>
+        <hbox>
+            <label width="160px"
+                   value="msg://totalMin"/>
+            <textField id="totalMinField"
+                       textChangeEventMode="EAGER"
+                       width="250px"
+                       datatype="double"
+                       editable="false"/>
+        </hbox>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

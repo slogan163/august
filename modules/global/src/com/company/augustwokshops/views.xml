@@ -20,7 +20,13 @@
         <property name="employee"
                   view="_local"/>
         <property name="operation"
-                  view="operation-edit"/>
+                  view="operation-edit">
+            <property name="model"
+                      view="_minimal">
+                <property name="workShop"
+                          view="_minimal"/>
+            </property>
+        </property>
     </view>
     <view class="com.company.augustwokshops.entity.Employee"
           extends="_local"
