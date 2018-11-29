@@ -37,7 +37,7 @@ public class LaborIntensityBrowse extends AbstractLookup {
         monthPicker.addValueChangeListener(e -> refreshTable());
         workshopLookup.addValueChangeListener(e -> refreshTable());
         laborIntensitiesDs.addCollectionChangeListener(e -> timesheetsDs.refresh(
-                ParamsMap.of("items", e.getItems(), "date", monthPicker.getValue())));
+                ParamsMap.of("items", laborIntensitiesDs.getItems(), "date", monthPicker.getValue())));
 
         box = timesheetTabBox.unwrap(Layout.class);
     }

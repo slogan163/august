@@ -10,7 +10,7 @@
                          class="com.company.augustwokshops.entity.LaborIntensity"
                          datasourceClass="com.company.augustwokshops.web.laborintensity.datasources.LaborIntensitiesDs"/>
         <collectionDatasource id="timesheetsDs"
-                              class="com.haulmont.cuba.core.entity.KeyValueEntity"
+                              class="com.company.augustwokshops.entity.Timesheet"
                               datasourceClass="com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs"/>
         <collectionDatasource id="workShopsDs"
                               class="com.company.augustwokshops.entity.WorkShop">
@@ -96,7 +96,14 @@
                       height="100%"
                       spacing="true"
                       margin="true,false,false,false">
-
+                    <table id="timesheetsDataGrid"
+                           width="100%"
+                           height="100%">
+                        <columns>
+                            <column id="id"/>
+                        </columns>
+                        <rows datasource="timesheetsDs"/>
+                    </table>
                 </vbox>
             </tab>
         </tabSheet>
