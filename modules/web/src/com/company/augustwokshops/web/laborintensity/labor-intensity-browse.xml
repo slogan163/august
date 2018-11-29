@@ -8,7 +8,10 @@
     <dsContext>
         <groupDatasource id="laborIntensitiesDs"
                          class="com.company.augustwokshops.entity.LaborIntensity"
-                         datasourceClass="com.company.augustwokshops.web.laborintensity.LaborIntensitiesDs"/>
+                         datasourceClass="com.company.augustwokshops.web.laborintensity.datasources.LaborIntensitiesDs"/>
+        <collectionDatasource id="timesheetsDs"
+                              class="com.haulmont.cuba.core.entity.KeyValueEntity"
+                              datasourceClass="com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs"/>
         <collectionDatasource id="workShopsDs"
                               class="com.company.augustwokshops.entity.WorkShop">
             <query>
@@ -92,7 +95,9 @@
                       width="100%"
                       height="100%"
                       spacing="true"
-                      margin="true,false,false,false"/>
+                      margin="true,false,false,false">
+
+                </vbox>
             </tab>
         </tabSheet>
     </layout>

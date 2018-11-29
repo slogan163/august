@@ -2,6 +2,8 @@ package com.company.augustwokshops.web.laborintensity;
 
 import com.company.augustwokshops.entity.LaborIntensity;
 import com.company.augustwokshops.entity.WorkShop;
+import com.company.augustwokshops.web.laborintensity.datasources.LaborIntensitiesDs;
+import com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs;
 import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.gui.components.*;
 import com.vaadin.ui.Layout;
@@ -16,6 +18,8 @@ public class LaborIntensityBrowse extends AbstractLookup {
 
     @Inject
     protected LaborIntensitiesDs laborIntensitiesDs;
+    @Inject
+    protected TimesheetsDs timesheetsDs;
     @Inject
     protected GroupTable<LaborIntensity> laborIntensitiesTable;
     @Inject
@@ -32,18 +36,10 @@ public class LaborIntensityBrowse extends AbstractLookup {
     public void init(Map<String, Object> params) {
         monthPicker.addValueChangeListener(e -> refreshTable());
         workshopLookup.addValueChangeListener(e -> refreshTable());
-        laborIntensitiesDs.addCollectionChangeListener(e -> refreshTimesheets(e.getItems()));
+        laborIntensitiesDs.addCollectionChangeListener(e -> timesheetsDs.refresh(
+                ParamsMap.of("items", e.getItems(), "date", monthPicker.getValue())));
 
         box = timesheetTabBox.unwrap(Layout.class);
-    }
-
-    private void refreshTimesheets(List<LaborIntensity> items) {
-        box.removeComponent(table);
-
-//        table = new Table();
-//        table.addGeneratedColumn("first", );
-
-        box.addComponent(table);
     }
 
     protected void refreshTable() {

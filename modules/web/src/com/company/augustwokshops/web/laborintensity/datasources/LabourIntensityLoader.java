@@ -1,21 +1,19 @@
-package com.company.augustwokshops.web.laborintensity;
+package com.company.augustwokshops.web.laborintensity.datasources;
 
 import com.company.augustwokshops.entity.LaborIntensity;
 import com.company.augustwokshops.entity.WorkShop;
-import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.gui.data.impl.CustomGroupDatasource;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class LaborIntensitiesDs extends CustomGroupDatasource<LaborIntensity, UUID> {
+public interface LabourIntensityLoader {
 
-    private DataManager dataManager = AppBeans.get(DataManager.class);
-
-    @Override
-    protected Collection<LaborIntensity> getEntities(Map<String, Object> params) {
+    default Collection<LaborIntensity> getEntities(DataManager dataManager, Map<String, Object> params) {
         WorkShop workshop = (WorkShop) params.get("workshop");
         Date date = (Date) params.getOrDefault("date", new Date());
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
