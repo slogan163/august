@@ -1,5 +1,6 @@
 package com.company.augustwokshops.web.laborintensity.datasources;
 
+import com.company.augustwokshops.DateUtils;
 import com.company.augustwokshops.entity.LaborIntensity;
 import com.company.augustwokshops.entity.WorkShop;
 import com.haulmont.cuba.core.global.DataManager;
@@ -15,8 +16,7 @@ public interface LabourIntensityLoader {
 
     default Collection<LaborIntensity> getEntities(DataManager dataManager, Map<String, Object> params) {
         WorkShop workshop = (WorkShop) params.get("workshop");
-        Date date = (Date) params.getOrDefault("date", new Date());
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDate = DateUtils.localDate((Date) params.getOrDefault("date", new Date()));
 
         StringBuilder query = new StringBuilder("select e from augustwokshops$LaborIntensity e ");
         query.append("where extract(YEAR from e.date) = :year and extract(MONTH from e.date) = :month ");

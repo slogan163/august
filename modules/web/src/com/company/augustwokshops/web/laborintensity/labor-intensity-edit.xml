@@ -83,7 +83,12 @@
                                property="partyCount"
                                datatype="int"/>
                 </field>
-                <field property="elaboration"/>
+                <field id="elaboration">
+                    <textField id="elaborationField"
+                               datasource="laborIntensityDs"
+                               property="elaboration"
+                               datatype="double"/>
+                </field>
             </column>
         </fieldGroup>
         <hbox>

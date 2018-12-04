@@ -16,52 +16,7 @@ public class Timesheet extends BaseStringIdEntity implements HasUuid {
     protected String id;
 
     @MetaProperty
-    protected Integer date;
-
-    @MetaProperty
-    protected Double elaboration;
-
-    @MetaProperty
-    protected Integer mans;
-
-    @MetaProperty
-    protected Double plannedElaboration;
-
-    @MetaProperty
     protected UUID uuid;
-
-    public void setDate(Integer date) {
-        this.date = date;
-    }
-
-    public Integer getDate() {
-        return date;
-    }
-
-    public void setElaboration(Double elaboration) {
-        this.elaboration = elaboration;
-    }
-
-    public Double getElaboration() {
-        return elaboration;
-    }
-
-    public void setMans(Integer mans) {
-        this.mans = mans;
-    }
-
-    public Integer getMans() {
-        return mans;
-    }
-
-    public void setPlannedElaboration(Double plannedElaboration) {
-        this.plannedElaboration = plannedElaboration;
-    }
-
-    public Double getPlannedElaboration() {
-        return plannedElaboration;
-    }
-
 
     @Override
     public String getId() {
@@ -80,6 +35,4 @@ public class Timesheet extends BaseStringIdEntity implements HasUuid {
     public UUID getUuid() {
         return uuid;
     }
-
-
 }

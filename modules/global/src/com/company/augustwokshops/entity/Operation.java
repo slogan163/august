@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+
 import javax.persistence.Lob;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -52,15 +54,13 @@ public class Operation extends StandardEntity {
         return model;
     }
 
-
     public void setPartyTimeMin(Integer partyTimeMin) {
         this.partyTimeMin = partyTimeMin;
     }
 
     public Integer getPartyTimeMin() {
-        return partyTimeMin;
+        return partyTimeMin != null ? partyTimeMin : 0;
     }
-
 
     public void setDescription(String description) {
         this.description = description;
@@ -83,7 +83,7 @@ public class Operation extends StandardEntity {
     }
 
     public Integer getOperationTimeSec() {
-        return operationTimeSec;
+        return operationTimeSec != null ? operationTimeSec : 0;
     }
 
     public void setFacilitiesAndPlaceOfPerfomance(String facilitiesAndPlaceOfPerfomance) {
@@ -94,7 +94,6 @@ public class Operation extends StandardEntity {
         return facilitiesAndPlaceOfPerfomance;
     }
 
-
     public void setNumber(Integer number) {
         this.number = number;
     }
@@ -102,7 +101,4 @@ public class Operation extends StandardEntity {
     public Integer getNumber() {
         return number;
     }
-
-
-
 }

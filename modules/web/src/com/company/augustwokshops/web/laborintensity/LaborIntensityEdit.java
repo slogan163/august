@@ -2,7 +2,10 @@ package com.company.augustwokshops.web.laborintensity;
 
 import com.company.augustwokshops.entity.*;
 import com.haulmont.cuba.core.global.PersistenceHelper;
-import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.components.AbstractEditor;
+import com.haulmont.cuba.gui.components.Frame;
+import com.haulmont.cuba.gui.components.LookupField;
+import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.components.actions.BaseAction;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
@@ -10,7 +13,6 @@ import com.haulmont.cuba.web.gui.components.WebButton;
 
 import javax.inject.Inject;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
@@ -34,13 +36,9 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
     @Inject
     protected LookupField operationLookup;
     @Inject
-    protected FieldGroup fieldGroup;
-    @Inject
     protected TextField operationTimeSecField;
     @Inject
     protected TextField partyTimeMinField;
-    @Inject
-    protected TextField partyCountField;
     @Inject
     protected TextField totalMinField;
     @Inject
@@ -77,9 +75,7 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
             }
         });
 
-        operationTimeSecField.addValueChangeListener(e -> calculateTotalMin());
-        partyTimeMinField.addValueChangeListener(e -> calculateTotalMin());
-        partyCountField.addValueChangeListener(e -> calculateTotalMin());
+        laborIntensityDs.addItemPropertyChangeListener(e -> calculateTotalMin());
 
         WebButton btn = new WebButton();
         btn.setAction(new BaseAction("calculate").withCaption("Посчитать итого").withHandler(e -> calculateTotalMin()));
@@ -87,13 +83,6 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
     }
 
     protected void calculateTotalMin() {
-        int operationTimeSec = Optional.ofNullable((Integer) operationTimeSecField.getValue()).orElse(0);
-        int partyTimeMin = Optional.ofNullable((Integer) partyTimeMinField.getValue()).orElse(0);
-        int partyCount = Optional.ofNullable((Integer) partyCountField.getValue()).orElse(0);
-
-        double partyAllTimeMin = (double) operationTimeSec * partyCount / 60;
-        double totalMin = partyAllTimeMin == 0d ? 0d : partyAllTimeMin + partyTimeMin;
-
-        totalMinField.setValue(totalMin);
+        totalMinField.setValue(getItem().getTotalMin());
     }
 }

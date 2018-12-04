@@ -70,7 +70,7 @@ create table AUGUSTWOKSHOPS_LABOR_INTENSITY (
     EMPLOYEE_ID uuid not null,
     OPERATION_ID uuid not null,
     PARTY_COUNT integer not null,
-    ELABORATION varchar(255),
+    ELABORATION double precision,
     --
     primary key (ID)
 )^

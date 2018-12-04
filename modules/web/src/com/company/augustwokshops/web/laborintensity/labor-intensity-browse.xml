@@ -65,11 +65,11 @@
                             <column id="employee"/>
                             <column id="model"/>
                             <column id="operation"/>
+                            <column id="totalMin"/>
                             <column id="operation.operationTimeSec"/>
                             <column id="operation.partyTimeMin"/>
                             <column id="partyCount"/>
                             <column id="elaboration"/>
-                            <column id="totalMin"/>
                         </columns>
                         <rows datasource="laborIntensitiesDs"/>
                         <rowsCount/>
@@ -94,16 +94,20 @@
                 <vbox id="timesheetTabBox"
                       width="100%"
                       height="100%"
+                      expand="timesheetGrid"
                       spacing="true"
                       margin="true,false,false,false">
-                    <table id="timesheetsDataGrid"
-                           width="100%"
-                           height="100%">
+                    <dataGrid id="timesheetGrid"
+                              contextMenuEnabled="false"
+                              datasource="timesheetsDs"
+                              width="100%">
                         <columns>
-                            <column id="id"/>
+                            <column id="id"
+                                    property="id"
+                                    caption="Дата"
+                                    width="75px"/>
                         </columns>
-                        <rows datasource="timesheetsDs"/>
-                    </table>
+                    </dataGrid>
                 </vbox>
             </tab>
         </tabSheet>

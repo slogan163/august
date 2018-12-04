@@ -44,7 +44,15 @@ public class LaborIntensity extends StandardEntity {
     protected Integer partyCount = 0;
 
     @Column(name = "ELABORATION")
-    protected String elaboration;
+    protected Double elaboration = 0d;
+
+    public Double getElaboration() {
+        return elaboration != null ? elaboration : 0d;
+    }
+
+    public void setElaboration(Double elaboration) {
+        this.elaboration = elaboration;
+    }
 
     @MetaProperty(related = "operation")
     public Double getTotalMin() {
@@ -52,8 +60,8 @@ public class LaborIntensity extends StandardEntity {
             return 0d;
         }
 
-        double partyAllTimeMin = (double) operation.operationTimeSec * partyCount / 60;
-        return partyAllTimeMin == 0d ? 0d : partyAllTimeMin + operation.partyTimeMin;
+        double partyAllTimeMin = (double) operation.getOperationTimeSec() * partyCount / 60;
+        return partyAllTimeMin == 0d ? 0d : partyAllTimeMin + operation.getPartyTimeMin() + getElaboration();
     }
 
     @Nullable
@@ -77,14 +85,6 @@ public class LaborIntensity extends StandardEntity {
         }
 
         return operation.getModel();
-    }
-
-    public void setElaboration(String elaboration) {
-        this.elaboration = elaboration;
-    }
-
-    public String getElaboration() {
-        return elaboration;
     }
 
     public void setPartyCount(Integer partyCount) {

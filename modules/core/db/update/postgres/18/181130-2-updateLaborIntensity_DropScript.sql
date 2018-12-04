@@ -1,0 +1,1 @@
+alter table AUGUSTWOKSHOPS_LABOR_INTENSITY drop column ELABORATION__U24297 cascade ;
