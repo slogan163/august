@@ -94,4 +94,10 @@
                       view="_local"/>
         </property>
     </view>
+    <view entity="augustwokshops$WorkShop"
+          name="workShop-with-employees"
+          extends="_local">
+        <property name="emploees"
+                  view="_local"/>
+    </view>
 </views>

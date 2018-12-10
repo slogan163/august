@@ -1,6 +1,7 @@
 package com.company.augustwokshops.web.laborintensity;
 
 import com.company.augustwokshops.DateUtils;
+import com.company.augustwokshops.entity.Employee;
 import com.company.augustwokshops.entity.LaborIntensity;
 import com.company.augustwokshops.entity.Timesheet;
 import com.company.augustwokshops.entity.WorkShop;
@@ -11,12 +12,16 @@ import com.haulmont.cuba.gui.components.*;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 public class LaborIntensityBrowse extends AbstractLookup {
+
+    public static final String ELABORATION = "Выработка, час";
+    public static final String FOND_FACT = "Фонд факт.";
 
     @Inject
     protected LaborIntensitiesDs laborIntensitiesDs;
@@ -38,9 +43,11 @@ public class LaborIntensityBrowse extends AbstractLookup {
 
         laborIntensitiesDs.addCollectionChangeListener(e -> {
             removeColumns();
-            addColumns();
-            timesheetsDs.refresh(
-                    ParamsMap.of("items", laborIntensitiesDs.getItems(), "date", monthPicker.getValue()));
+            timesheetsDs.refresh(ParamsMap.of("items", laborIntensitiesDs.getItems(),
+                    "date", monthPicker.getValue()));
+            if (workshopLookup.getValue() != null) {
+                addColumns();
+            }
         });
     }
 
@@ -53,41 +60,74 @@ public class LaborIntensityBrowse extends AbstractLookup {
     private void removeColumns() {
         List<DataGrid.Column> removedColumns = timesheetGrid.getColumns().stream()
                 .filter(c -> !c.getId().equals("id"))
-                .collect(Collectors.toList());
+                .collect(toList());
         removedColumns.forEach(c -> timesheetGrid.removeColumn(c));
     }
 
     private void addColumns() {
-        Map<String, List<LaborIntensity>> mapByLastName = getLastNames();
+        addLatNamesColumns();
+        addColumn(ELABORATION);
+    }
 
-        mapByLastName.keySet().stream().sorted().forEach(lastName -> {
+    protected void addLatNamesColumns() {
+        for (String lastName : getLastNames()) {
+            addColumn(lastName);
+        }
+    }
 
-            timesheetGrid.addGeneratedColumn(lastName, new DataGrid.ColumnGenerator<Timesheet, Double>() {
-                @Override
-                public Double getValue(DataGrid.ColumnGeneratorEvent<Timesheet> event) {
-                    Integer date = Integer.valueOf(event.getItem().getId());
-                    LaborIntensity intensity = findByDate(date, mapByLastName.get(lastName));
-                    return intensity == null ? 0d : intensity.getTotalMin();
+    protected void addColumn(String columnName) {
+        timesheetGrid.addGeneratedColumn(columnName, new DataGrid.ColumnGenerator<Timesheet, Double>() {
+            @Override
+            public Double getValue(DataGrid.ColumnGeneratorEvent<Timesheet> event) {
+                String rowName = event.getItem().getId();
+
+                switch (columnName) {
+                    case ELABORATION:
+                        return calculateElaborationColumn(rowName);
+                    default:
+                        return calculateLastNameColumn(columnName, rowName);
                 }
+            }
 
-                @Override
-                public Class<Double> getType() {
-                    return Double.class;
-                }
-            });
+            @Override
+            public Class<Double> getType() {
+                return Double.class;
+            }
         });
     }
 
-    protected Map<String, List<LaborIntensity>> getLastNames() {
+    private Double calculateElaborationColumn(String rowName) {
+        if (FOND_FACT.equals(rowName)) {
+            return laborIntensitiesDs.getItems().stream()
+                    .mapToDouble(LaborIntensity::getTotalMin)
+                    .sum() / 60;
+        }
+
+        Integer date = Integer.valueOf(rowName);
         return laborIntensitiesDs.getItems().stream()
-                .collect(Collectors.groupingBy(i -> i.getEmployee().getLastName()));
+                .filter(i -> date.equals(DateUtils.getDayOfMonth(i.getDate())))
+                .mapToDouble(LaborIntensity::getTotalMin)
+                .sum() / 60;
     }
 
-    @Nullable
-    protected LaborIntensity findByDate(Integer date, List<LaborIntensity> intensities) {
-        return intensities.stream()
+    private Double calculateLastNameColumn(String lastName, String rowName) {
+        if (FOND_FACT.equals(rowName)) {
+            return laborIntensitiesDs.getItems().stream()
+                    .filter(i -> lastName.equals(i.getEmployee().getLastName()))
+                    .mapToDouble(LaborIntensity::getTotalMin).sum() / 60;
+        }
+
+        Integer date = Integer.valueOf(rowName);
+        return laborIntensitiesDs.getItems().stream()
                 .filter(i -> date.equals(DateUtils.getDayOfMonth(i.getDate())))
-                .findAny()
-                .orElse(null);
+                .filter(i -> lastName.equals(i.getEmployee().getLastName()))
+                .mapToDouble(LaborIntensity::getTotalMin)
+                .sum() / 60;
+    }
+
+    protected List<String> getLastNames() {
+        return Optional.ofNullable(workshopLookup.getValue())
+                .map(w -> ((WorkShop) w).getEmploees().stream().map(Employee::getLastName).sorted().collect(toList()))
+                .orElse(Collections.emptyList());
     }
 }

@@ -10,6 +10,7 @@ import com.haulmont.cuba.gui.data.impl.CustomCollectionDatasource;
 import java.time.LocalDate;
 import java.util.*;
 
+import static com.company.augustwokshops.web.laborintensity.LaborIntensityBrowse.FOND_FACT;
 import static org.apache.commons.collections4.CollectionUtils.emptyCollection;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
@@ -37,6 +38,11 @@ public class TimesheetsDs extends CustomCollectionDatasource<Timesheet, String> 
             timesheet.setId(String.valueOf(i));
             timesheets.add(timesheet);
         }
+
+        Timesheet fond = metadata.create(Timesheet.class);
+        fond.setId(FOND_FACT);
+        timesheets.add(fond);
+
         return timesheets;
     }
 }

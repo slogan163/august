@@ -13,6 +13,7 @@
                               class="com.company.augustwokshops.entity.Timesheet"
                               datasourceClass="com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs"/>
         <collectionDatasource id="workShopsDs"
+                              view="workShop-with-employees"
                               class="com.company.augustwokshops.entity.WorkShop">
             <query>
                 <![CDATA[select e from augustwokshops$WorkShop e]]>
