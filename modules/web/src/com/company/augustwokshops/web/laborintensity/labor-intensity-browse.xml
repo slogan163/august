@@ -102,12 +102,19 @@
                               contextMenuEnabled="false"
                               datasource="timesheetsDs"
                               width="100%">
+                        <actions>
+                            <action id="excel" />
+                        </actions>
                         <columns>
                             <column id="id"
                                     property="id"
                                     caption="Дата"
                                     width="75px"/>
                         </columns>
+                        <buttonsPanel>
+                            <button id="excelTimesheetBtn"
+                                    action="timesheetGrid.excel"/>
+                        </buttonsPanel>
                     </dataGrid>
                 </vbox>
             </tab>
