@@ -103,13 +103,16 @@
                               datasource="timesheetsDs"
                               width="100%">
                         <actions>
-                            <action id="excel" />
+                            <action id="excel"/>
                         </actions>
                         <columns>
-                            <column id="id"
-                                    property="id"
+                            <column id="caption"
+                                    property="caption"
                                     caption="Дата"
                                     width="75px"/>
+                            <column id="elaborationSum"
+                                    property="elaborationSum"
+                                    caption="Выработка, час"/>
                         </columns>
                         <buttonsPanel>
                             <button id="excelTimesheetBtn"
