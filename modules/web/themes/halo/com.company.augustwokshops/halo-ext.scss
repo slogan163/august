@@ -1,0 +1,7 @@
+/* Define your theme modifications inside next mixin */
+@mixin com_company_augustwokshops-halo-ext {
+  .v-grid-cell.red {
+    background-color: red;
+    color: white;
+  }
+}

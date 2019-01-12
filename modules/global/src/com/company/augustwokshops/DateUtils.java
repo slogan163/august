@@ -6,12 +6,15 @@ import java.util.Date;
 
 public class DateUtils {
 
-
     private DateUtils() {
 
     }
 
     public static int getDayOfMonth(Date date) {
+        if (date instanceof java.sql.Date) {
+            return ((java.sql.Date) date).toLocalDate().getDayOfMonth();
+        }
+
         return localDate(date).getDayOfMonth();
     }
 

@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs.FOND_FACT_ROW;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
@@ -44,6 +45,15 @@ public class LaborIntensityBrowse extends AbstractLookup {
                     "date", monthPicker.getValue()));
             addLatNamesColumns();
         });
+
+        timesheetGrid.addCellStyleProvider((timesheet, columnId) -> {
+            if (isLastNameColumn(columnId) && !FOND_FACT_ROW.equals(timesheet.getId())) {
+                Double cellElaboration = timesheet.getLastNameHoursMap().getOrDefault(columnId, 0d);
+                return cellElaboration > 40 ? "red" : null;
+            }
+
+            return null;
+        });
     }
 
     protected void refreshIntensitiesTable() {
@@ -54,7 +64,7 @@ public class LaborIntensityBrowse extends AbstractLookup {
 
     private void removeColumns() {
         List<DataGrid.Column> removedColumns = timesheetGrid.getColumns().stream()
-                .filter(c -> !asList("caption", "elaborationSum").contains(c.getId()))
+                .filter(c -> isLastNameColumn(c.getId()))
                 .collect(toList());
         removedColumns.forEach(c -> timesheetGrid.removeColumn(c));
     }
@@ -64,6 +74,10 @@ public class LaborIntensityBrowse extends AbstractLookup {
         for (int i = 0; i < lastNames.size(); i++) {
             addColumn(lastNames.get(i), i + 1);
         }
+    }
+
+    protected boolean isLastNameColumn(String columnId) {
+        return !asList("caption", "elaborationSum").contains(columnId);
     }
 
     protected void addColumn(String lastName, int index) {

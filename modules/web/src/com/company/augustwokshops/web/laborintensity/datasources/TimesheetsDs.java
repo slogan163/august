@@ -18,6 +18,8 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 public class TimesheetsDs extends CustomCollectionDatasource<Timesheet, String> {
 
+    public static final String FOND_FACT_ROW = "fondFact";
+
     private Metadata metadata = AppBeans.get(Metadata.class);
 
     protected Collection<LaborIntensity> laborIntensities = new ArrayList<>();
@@ -72,7 +74,7 @@ public class TimesheetsDs extends CustomCollectionDatasource<Timesheet, String> 
 
     protected Timesheet createFondTimesheet() {
         Timesheet timesheet = metadata.create(Timesheet.class);
-        timesheet.setId("elaborationSum");
+        timesheet.setId(FOND_FACT_ROW);
         timesheet.setCaption("Фонд факт.");
 
         for (String lastName : getLastNames()) {
