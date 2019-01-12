@@ -48,6 +48,8 @@
                                     resolution="MONTH"/>
                     </hbox>
                     <groupTable id="laborIntensitiesTable"
+                                showTotalAggregation="false"
+                                aggregatable="true"
                                 width="100%">
                         <actions>
                             <action id="create"
@@ -61,12 +63,14 @@
                         <columns>
                             <group>
                                 <column id="date"/>
+                                <column id="employee"/>
                             </group>
+                            <column id="totalMin">
+                                <aggregation type="SUM"/>
+                            </column>
                             <column id="workShop"/>
-                            <column id="employee"/>
                             <column id="model"/>
                             <column id="operation"/>
-                            <column id="totalMin"/>
                             <column id="operation.operationTimeSec"/>
                             <column id="operation.partyTimeMin"/>
                             <column id="partyCount"/>
