@@ -49,7 +49,7 @@ public class LaborIntensityBrowse extends AbstractLookup {
         timesheetGrid.addCellStyleProvider((timesheet, columnId) -> {
             if (isLastNameColumn(columnId) && !FOND_FACT_ROW.equals(timesheet.getId())) {
                 Double cellElaboration = timesheet.getLastNameHoursMap().getOrDefault(columnId, 0d);
-                return cellElaboration > 40 ? "red" : null;
+                return cellElaboration > 7.4d ? "red" : null;
             }
 
             return null;
