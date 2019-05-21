@@ -1,22 +1,14 @@
 package com.company.augustwokshops.entity;
 
-import javax.annotation.Nullable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import com.haulmont.chile.core.annotations.MetaProperty;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.global.PersistenceHelper;
 
+import javax.annotation.Nullable;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @NamePattern("%s|employee")
 @Table(name = "AUGUSTWOKSHOPS_LABOR_INTENSITY")
@@ -45,6 +37,18 @@ public class LaborIntensity extends StandardEntity {
 
     @Column(name = "ELABORATION")
     protected Double elaboration = 0d;
+
+    @Lob
+    @Column(name = "COMMENTS")
+    protected String comments;
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getComments() {
+        return comments;
+    }
 
     public Double getElaboration() {
         return elaboration != null ? elaboration : 0d;

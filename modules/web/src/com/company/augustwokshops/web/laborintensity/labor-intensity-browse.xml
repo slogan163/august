@@ -75,6 +75,8 @@
                             <column id="operation.partyTimeMin"/>
                             <column id="partyCount"/>
                             <column id="elaboration"/>
+                            <column id="comments"
+                                    maxTextLength="50"/>
                         </columns>
                         <rows datasource="laborIntensitiesDs"/>
                         <rowsCount/>

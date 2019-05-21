@@ -1,0 +1,1 @@
+alter table AUGUSTWOKSHOPS_LABOR_INTENSITY add column COMMENTS text ;

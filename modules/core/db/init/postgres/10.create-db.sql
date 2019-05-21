@@ -71,6 +71,7 @@ create table AUGUSTWOKSHOPS_LABOR_INTENSITY (
     OPERATION_ID uuid not null,
     PARTY_COUNT integer not null,
     ELABORATION double precision,
+    COMMENTS text,
     --
     primary key (ID)
 )^

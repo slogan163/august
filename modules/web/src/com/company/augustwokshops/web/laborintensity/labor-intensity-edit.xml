@@ -89,6 +89,8 @@
                                property="elaboration"
                                datatype="double"/>
                 </field>
+                <field property="comments"
+                       rows="5"/>
             </column>
         </fieldGroup>
         <hbox>
