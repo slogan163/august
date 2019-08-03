@@ -19,7 +19,7 @@
                               class="com.company.augustwokshops.entity.WorkShop"
                               view="laborIntensity-workshops">
             <query>
-                <![CDATA[select e from augustwokshops$WorkShop e]]>
+                <![CDATA[select e from augustwokshops$WorkShop e order by e.number ]]>
             </query>
             <collectionDatasource id="emploeesDs"
                                   property="emploees"/>

@@ -16,7 +16,7 @@
                               class="com.company.augustwokshops.entity.WorkShop"
                               view="_minimal">
             <query>
-                <![CDATA[select e from augustwokshops$WorkShop e]]>
+                <![CDATA[select e from augustwokshops$WorkShop e order by e.number]]>
             </query>
         </collectionDatasource>
     </dsContext>

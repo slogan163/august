@@ -18,13 +18,12 @@
         <fieldGroup id="fieldGroup"
                     datasource="operationDs">
             <column width="250px">
-                <field property="model"
-                       editable="false"/>
+                <field editable="false"
+                       property="model"/>
                 <field property="number"/>
                 <field property="description"
                        rows="5"/>
                 <field property="executor"/>
-                <field property="facilitiesAndPlaceOfPerfomance"/>
                 <field property="operationTimeSec"/>
                 <field property="partyTimeMin"/>
             </column>

@@ -22,8 +22,8 @@
         </collectionDatasource>
     </dsContext>
     <dialogMode closeOnClickOutside="true"
-                resizable="true"
                 height="600"
+                resizable="true"
                 width="1000"/>
     <layout expand="groupBox"
             spacing="true">
@@ -53,7 +53,6 @@
                     <column id="number"/>
                     <column id="description"/>
                     <column id="executor"/>
-                    <column id="facilitiesAndPlaceOfPerfomance"/>
                     <column id="operationTimeSec"/>
                     <column id="partyTimeMin"/>
                 </columns>

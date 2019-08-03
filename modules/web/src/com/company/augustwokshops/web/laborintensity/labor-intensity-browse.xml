@@ -16,7 +16,7 @@
                               view="workShop-with-employees"
                               class="com.company.augustwokshops.entity.WorkShop">
             <query>
-                <![CDATA[select e from augustwokshops$WorkShop e]]>
+                <![CDATA[select e from augustwokshops$WorkShop e order by e.number]]>
             </query>
         </collectionDatasource>
     </dsContext>
@@ -40,7 +40,7 @@
                                value="msg://workshop"/>
                         <lookupField id="workshopLookup"
                                      align="MIDDLE_CENTER"
-                                     nullName="msg://all"
+                                     nullOptionVisible="false"
                                      optionsDatasource="workShopsDs"/>
                         <label align="MIDDLE_CENTER"
                                value="msg://month"/>
@@ -53,6 +53,7 @@
                                 width="100%">
                         <actions>
                             <action id="create"
+                                    enable="false"
                                     openType="DIALOG"/>
                             <action id="edit"
                                     openType="DIALOG"/>
@@ -65,9 +66,7 @@
                                 <column id="date"/>
                                 <column id="employee"/>
                             </group>
-                            <column id="totalMin">
-                                <aggregation type="SUM"/>
-                            </column>
+                            <column id="totalMin"/>
                             <column id="workShop"/>
                             <column id="model"/>
                             <column id="operation"/>

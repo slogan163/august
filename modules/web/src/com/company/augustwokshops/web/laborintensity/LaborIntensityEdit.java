@@ -2,6 +2,7 @@ package com.company.augustwokshops.web.laborintensity;
 
 import com.company.augustwokshops.entity.*;
 import com.haulmont.cuba.core.global.PersistenceHelper;
+import com.haulmont.cuba.gui.WindowParam;
 import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.haulmont.cuba.gui.components.Frame;
 import com.haulmont.cuba.gui.components.LookupField;
@@ -44,9 +45,18 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
     @Inject
     protected Frame windowActions;
 
+    @WindowParam(name = "workshop")
+    private WorkShop workshop;
+
     @Override
     public void ready() {
         LaborIntensity item = getItem();
+
+        if(workshop != null){
+            workShopLookup.setValue(workShopsDs.getItems().stream().filter(i -> i.getId().equals(workshop.getId())).findAny().orElse(null));
+            workShopLookup.setEditable(false);
+        }
+
         calculateTotalMin();
 
         if (!PersistenceHelper.isNew(item)) {

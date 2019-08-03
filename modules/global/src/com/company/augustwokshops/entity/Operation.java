@@ -1,17 +1,10 @@
 package com.company.augustwokshops.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.StandardEntity;
 
-import javax.persistence.Lob;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NamePattern("%s|number")
 @Table(name = "AUGUSTWOKSHOPS_OPERATION")
@@ -21,7 +14,7 @@ public class Operation extends StandardEntity {
 
     @NotNull
     @Column(name = "NUMBER_", nullable = false)
-    protected Integer number;
+    protected String number;
 
     @Lob
     @Column(name = "DESCRIPTION")
@@ -29,9 +22,6 @@ public class Operation extends StandardEntity {
 
     @Column(name = "EXECUTOR")
     protected String executor;
-
-    @Column(name = "FACILITIES_AND_PLACE_OF_PERFOMANCE")
-    protected String facilitiesAndPlaceOfPerfomance;
 
     @NotNull
     @Column(name = "OPERATION_TIME_MIN", nullable = false)
@@ -45,6 +35,14 @@ public class Operation extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MODEL_ID")
     protected Model model;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public void setModel(Model model) {
         this.model = model;
@@ -86,19 +84,7 @@ public class Operation extends StandardEntity {
         return operationTimeSec != null ? operationTimeSec : 0;
     }
 
-    public void setFacilitiesAndPlaceOfPerfomance(String facilitiesAndPlaceOfPerfomance) {
-        this.facilitiesAndPlaceOfPerfomance = facilitiesAndPlaceOfPerfomance;
-    }
 
-    public String getFacilitiesAndPlaceOfPerfomance() {
-        return facilitiesAndPlaceOfPerfomance;
-    }
 
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
 
-    public Integer getNumber() {
-        return number;
-    }
 }

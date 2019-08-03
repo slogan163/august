@@ -26,10 +26,9 @@ create table AUGUSTWOKSHOPS_OPERATION (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    NUMBER_ integer not null,
+    NUMBER_ varchar(255) not null,
     DESCRIPTION text,
     EXECUTOR varchar(255),
-    FACILITIES_AND_PLACE_OF_PERFOMANCE varchar(255),
     OPERATION_TIME_MIN integer not null,
     PARTY_TIME integer not null,
     MODEL_ID uuid not null,

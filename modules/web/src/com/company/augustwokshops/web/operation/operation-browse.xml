@@ -10,7 +10,7 @@
                               class="com.company.augustwokshops.entity.Operation"
                               view="operation-browser">
             <query>
-                <![CDATA[select e from augustwokshops$Operation e]]>
+                <![CDATA[select e from augustwokshops$Operation e order by e.number]]>
             </query>
         </collectionDatasource>
     </dsContext>
@@ -32,7 +32,6 @@
                 <column id="number"/>
                 <column id="description"/>
                 <column id="executor"/>
-                <column id="facilitiesAndPlaceOfPerfomance"/>
                 <column id="operationTimeSec"/>
                 <column id="partyTimeMin"/>
             </columns>

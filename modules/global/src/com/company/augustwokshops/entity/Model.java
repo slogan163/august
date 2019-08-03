@@ -1,26 +1,14 @@
 package com.company.augustwokshops.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-
-import com.haulmont.chile.core.annotations.MetaProperty;
-import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.chile.core.annotations.NamePattern;
-
-import javax.validation.constraints.NotNull;
-import javax.persistence.Lob;
-
 import com.haulmont.chile.core.annotations.Composition;
+import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @NamePattern("%s|name")
 @Table(name = "AUGUSTWOKSHOPS_MODEL")
@@ -35,6 +23,7 @@ public class Model extends StandardEntity {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "model")
+    @OrderBy("number")
     protected List<Operation> operations;
 
     @ManyToOne(fetch = FetchType.LAZY)

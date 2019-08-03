@@ -1,13 +1,11 @@
 package com.company.augustwokshops.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
-import java.util.List;
-import javax.persistence.OneToMany;
+import com.haulmont.cuba.core.entity.StandardEntity;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @NamePattern("%s|number")
 @Table(name = "AUGUSTWOKSHOPS_WORK_SHOP")
@@ -20,9 +18,11 @@ public class WorkShop extends StandardEntity {
     protected String number;
 
     @OneToMany(mappedBy = "workShop")
+    @OrderBy("lastName,firstName")
     protected List<Employee> emploees;
 
     @OneToMany(mappedBy = "workShop")
+    @OrderBy("name")
     protected List<Model> models;
 
     public String getNumber() {

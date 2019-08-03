@@ -10,7 +10,7 @@
                               class="com.company.augustwokshops.entity.Employee"
                               view="employee-browser">
             <query>
-                <![CDATA[select e from augustwokshops$Employee e]]>
+                <![CDATA[select e from augustwokshops$Employee e order by e.lastName, e.firstName]]>
             </query>
         </collectionDatasource>
     </dsContext>

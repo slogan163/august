@@ -1,0 +1,1 @@
+alter table AUGUSTWOKSHOPS_OPERATION alter column NUMBER_ TYPE varchar(255) USING NUMBER_::VARCHAR;

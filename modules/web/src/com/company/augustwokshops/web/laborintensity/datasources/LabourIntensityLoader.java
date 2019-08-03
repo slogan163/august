@@ -6,10 +6,9 @@ import com.company.augustwokshops.entity.WorkShop;
 import com.haulmont.cuba.core.global.DataManager;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public interface LabourIntensityLoader {
@@ -18,21 +17,18 @@ public interface LabourIntensityLoader {
         WorkShop workshop = (WorkShop) params.get("workshop");
         LocalDate localDate = DateUtils.localDate((Date) params.getOrDefault("date", new Date()));
 
-        StringBuilder query = new StringBuilder("select e from augustwokshops$LaborIntensity e ");
-        query.append("where extract(YEAR from e.date) = :year and extract(MONTH from e.date) = :month ");
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("year", localDate.getYear());
-        map.put("month", localDate.getMonthValue());
-
-        if (workshop != null) {
-            query.append("and e.operation.model.workShop.id = :workshop ");
-            map.put("workshop", workshop);
+        if (workshop == null) {
+            return Collections.emptyList();
         }
 
         return dataManager.load(LaborIntensity.class)
-                .query(query.toString())
-                .setParameters(map)
+                .query("select e from augustwokshops$LaborIntensity e " +
+                        "where extract(YEAR from e.date) = :year and extract(MONTH from e.date) = :month " +
+                        "and e.operation.model.workShop.id = :workshop " +
+                        "order by e.date ")
+                .parameter("year", localDate.getYear())
+                .parameter("month", localDate.getMonthValue())
+                .parameter("workshop", workshop)
                 .view("laborIntensity-browser")
                 .list();
     }

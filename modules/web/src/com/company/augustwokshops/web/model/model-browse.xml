@@ -10,7 +10,7 @@
                          class="com.company.augustwokshops.entity.Model"
                          view="model-browser">
             <query>
-                <![CDATA[select e from augustwokshops$Model e]]>
+                <![CDATA[select e from augustwokshops$Model e order by e.name]]>
             </query>
         </groupDatasource>
     </dsContext>
