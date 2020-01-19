@@ -18,6 +18,8 @@
             <query>
                 <![CDATA[select e from augustwokshops$WorkShop e order by e.number]]>
             </query>
+            <collectionDatasource id="emploeesDs"
+                                  property="emploees"/>
         </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
@@ -46,6 +48,15 @@
                                value="msg://month"/>
                         <datePicker id="monthPicker"
                                     resolution="MONTH"/>
+                        <label align="MIDDLE_LEFT"
+                               value="msg://patternLael"/>
+                        <dateField id="patternDateField"
+                                   resolution="DAY"
+                                   align="MIDDLE_LEFT"/>
+                        <lookupField id="patternEmployeeLookup"
+                                     align="MIDDLE_LEFT"
+                                     optionsDatasource="emploeesDs"
+                                     width="200px"/>
                     </hbox>
                     <groupTable id="laborIntensitiesTable"
                                 showTotalAggregation="false"

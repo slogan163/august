@@ -9,12 +9,14 @@ import com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs;
 import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.actions.CreateAction;
+import com.haulmont.cuba.gui.data.CollectionDatasource;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.company.augustwokshops.web.laborintensity.datasources.TimesheetsDs.FOND_FACT_ROW;
 import static java.util.Arrays.asList;
@@ -25,6 +27,10 @@ public class LaborIntensityBrowse extends AbstractLookup {
     @Inject
     protected LaborIntensitiesDs laborIntensitiesDs;
     @Inject
+    private CollectionDatasource<WorkShop, UUID> workShopsDs;
+    @Inject
+    private CollectionDatasource<Employee, UUID> emploeesDs;
+    @Inject
     protected TimesheetsDs timesheetsDs;
     @Inject
     protected GroupTable<LaborIntensity> laborIntensitiesTable;
@@ -34,15 +40,19 @@ public class LaborIntensityBrowse extends AbstractLookup {
     protected DatePicker monthPicker;
     @Inject
     protected DataGrid<Timesheet> timesheetGrid;
+    @Inject
+    private DateField patternDateField;
     @Named("laborIntensitiesTable.create")
     private CreateAction create;
 
     @Override
     public void init(Map<String, Object> params) {
+        create.setWindowParamsSupplier(() -> ParamsMap.of("workshop", workShopsDs.getItem(),
+                "date", patternDateField.getValue(), "employee", emploeesDs.getItem()));
+
         monthPicker.addValueChangeListener(e -> refreshIntensitiesTable());
         workshopLookup.addValueChangeListener(e -> {
             create.setEnabled(e.getValue() != null);
-            create.setWindowParams(ParamsMap.of("workshop", e.getValue()));
             refreshIntensitiesTable();
         });
 

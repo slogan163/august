@@ -3,16 +3,15 @@ package com.company.augustwokshops.web.laborintensity;
 import com.company.augustwokshops.entity.*;
 import com.haulmont.cuba.core.global.PersistenceHelper;
 import com.haulmont.cuba.gui.WindowParam;
-import com.haulmont.cuba.gui.components.AbstractEditor;
-import com.haulmont.cuba.gui.components.Frame;
-import com.haulmont.cuba.gui.components.LookupField;
-import com.haulmont.cuba.gui.components.TextField;
+import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.actions.BaseAction;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
-import com.haulmont.cuba.web.gui.components.WebButton;
+import com.haulmont.cuba.gui.xml.layout.ComponentsFactory;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,6 +29,8 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
     protected CollectionDatasource<Operation, UUID> operationsDs;
     @Inject
     protected LookupField workShopLookup;
+    @Named("fieldGroup.date")
+    private DateField dateField;
     @Inject
     protected LookupField employeeLookup;
     @Inject
@@ -44,22 +45,35 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
     protected TextField totalMinField;
     @Inject
     protected Frame windowActions;
+    @Inject
+    private ComponentsFactory componentsFactory;
 
     @WindowParam(name = "workshop")
     private WorkShop workshop;
+    @WindowParam(name = "date")
+    private Date date;
+    @WindowParam(name = "employee")
+    private Employee employee;
 
     @Override
     public void ready() {
         LaborIntensity item = getItem();
 
-        if(workshop != null){
+        if (workshop != null) {
             workShopLookup.setValue(workShopsDs.getItems().stream().filter(i -> i.getId().equals(workshop.getId())).findAny().orElse(null));
             workShopLookup.setEditable(false);
         }
 
         calculateTotalMin();
 
-        if (!PersistenceHelper.isNew(item)) {
+        if (PersistenceHelper.isNew(item)) {
+            if (date != null) {
+                dateField.setValue(date);
+            }
+            if (employee != null) {
+                employeeLookup.setValue(employee);
+            }
+        } else {
             workShopLookup.setValue(workShopsDs.getItems().stream().filter(i -> i.getId().equals(item.getWorkShop().getId())).findAny().orElse(null));
             modelLookup.setValue(modelsDs.getItems().stream().filter(i -> i.getId().equals(item.getModel().getId())).findAny().orElse(null));
         }
@@ -87,7 +101,7 @@ public class LaborIntensityEdit extends AbstractEditor<LaborIntensity> {
 
         laborIntensityDs.addItemPropertyChangeListener(e -> calculateTotalMin());
 
-        WebButton btn = new WebButton();
+        Button btn = componentsFactory.createComponent(Button.class);
         btn.setAction(new BaseAction("calculate").withCaption("Посчитать итого").withHandler(e -> calculateTotalMin()));
         ((Container) windowActions.getOwnComponents().iterator().next()).add(btn);
     }
